@@ -10,18 +10,20 @@
     
     <!-- Fuentes Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     
     <!-- Estilos personalizados -->
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Times New Roman', Times, serif; /* Cambiado a Times New Roman */
             background-color: #f8f9fa;
             font-size: 12px;
         }
 
         /* Navbar */
         .navbar {
-            background-color: #5D2F8E; /* Morado oscuro */
+            background-color:rgb(74, 225, 89); /* Morado oscuro */
         }
 
         .navbar .navbar-brand, 
@@ -118,6 +120,11 @@
         .icon-custom:hover {
             color: #fff;
         }
+        .material-icons {
+    font-size: 20px; /* Tamaño del ícono */
+    color:rgb(255, 255, 255); /* Color del ícono */
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+}
     </style>
 </head>
 <body>
@@ -207,53 +214,54 @@
     </nav>
 
     <!-- Menú Lateral -->
-    <div class="sidebar d-none d-md-block">
-        <h4 class="text-center mb-4">Menú de Navegación</h4>
-        <div class="list-group">
-            <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
-                <i class="bi bi-house-door icon-custom"></i> Inicio
-            </a>
-            <a href="{% url 'about' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-info-circle icon-custom"></i> Sobre Nosotros
-            </a>
-            <a href="{% url 'listar_marcas' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-gear icon-custom"></i> Marcas
-            </a>
-            <a href="{% url 'listar_categorias' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-tags icon-custom"></i> Categorias
-            </a>
-            <a href="{% url 'listar_tipos_motor' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-motorcycle icon-custom"></i> Tipo de Motor
-            </a>
-            <a href="{% url 'listar_productos' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-box icon-custom"></i> Productos
-            </a>
-            <a href="{% url 'tipo_productos_listar' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-boxes icon-custom"></i> Tipo Producto
-            </a>
-            <a href="{% url 'producto_tipo_list' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-boxes icon-custom"></i> Productos tipo
-            </a>
-            <a href="{% url 'listar_clientes' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-person icon-custom"></i> Clientes
-            </a>
-            <a href="{% url 'listar_proveedores' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-person-check icon-custom"></i> Proveedores
-            </a>
-            <a href="{% url 'listar_compras' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-cart icon-custom"></i> Compras
-            </a>
-            <a href="{% url 'listar_ventas' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-cash-coin icon-custom"></i> Ventas
-            </a>
-            <a href="{% url 'listar_tipos_documento' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-file-earmark-text icon-custom"></i> Tipo de Documento
-            </a>
-            <a href="{% url 'calculadora' %}" class="list-group-item list-group-item-action">
-                <i class="bi bi-file-earmark-text icon-custom"></i> Calculadora
-            </a>
-        </div>
+  <div class="sidebar d-none d-md-block">
+    <h4 class="text-center mb-4">Menú de Navegación</h4>
+    <div class="list-group">
+        <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
+            <i class="material-icons">home</i> Inicio
+        </a>
+        <a href="{% url 'about' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">info</i> Sobre Nosotros
+        </a>
+        <a href="{% url 'listar_marcas' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">build</i> Marcas
+        </a>
+        <a href="{% url 'listar_categorias' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">category</i> Categorias
+        </a>
+        <a href="{% url 'listar_tipos_motor' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">commute</i> Tipo de Motor
+        </a>
+        <a href="{% url 'listar_productos' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">inventory</i> Productos
+        </a>
+        <a href="{% url 'tipo_productos_listar' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">view_module</i> Tipo Producto
+        </a>
+        <a href="{% url 'producto_tipo_list' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">widgets</i> Productos tipo
+        </a>
+        <a href="{% url 'listar_clientes' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">person</i> Clientes
+        </a>
+        <a href="{% url 'listar_proveedores' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">group</i> Proveedores
+        </a>
+        <a href="{% url 'listar_compras' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">shopping_cart</i> Compras
+        </a>
+        <a href="{% url 'listar_ventas' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">attach_money</i> Ventas
+        </a>
+        <a href="{% url 'listar_tipos_documento' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">description</i> Tipo de Documento
+        </a>
+        <a href="{% url 'calculadora' %}" class="list-group-item list-group-item-action">
+            <i class="material-icons">calculate</i> Calculadora
+        </a>
     </div>
+</div>
+
 
     <!-- Contenido Principal -->
     <div class="content">
