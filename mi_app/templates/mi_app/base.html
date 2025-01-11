@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Aplicación{% endblock %}</title>
+    
+    <!-- Incluir Bootstrap CSS desde el CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fuentes Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #5D2F8E; /* Morado oscuro */
+        }
+
+        .navbar .navbar-brand, 
+        .navbar .nav-link {
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ddd; /* Color gris claro al pasar el ratón */
+        }
+
+        /* Menú Lateral */
+        .sidebar {
+            background-color: #5D2F8E; /* Morado oscuro */
+            color: #fff;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 60px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .list-group-item {
+            background-color: #5D2F8E; /* Morado oscuro */
+            color: #fff;
+            border: none;
+            font-weight: 500;
+        }
+
+        .sidebar .list-group-item:hover {
+            background-color: #7A4A9F; /* Morado más claro al pasar el ratón */
+        }
+
+        .sidebar .list-group-item.active {
+            background-color: #9B5C9E; /* Morado más claro para el item activo */
+        }
+
+        /* Contenido Principal */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                height: auto;
+                padding-top: 20px;
+                width: 100%;
+                top: 0;
+            }
+            .sidebar .list-group-item {
+                font-size: 14px;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .navbar {
+                position: sticky;
+                top: 0;
+            }
+        }
+
+        /* Mejorar los botones */
+        .btn-custom {
+            background-color: #6f42c1;
+            color: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-5px); /* Efecto 3D al pasar el ratón */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-custom:active {
+            transform: translateY(2px); /* Efecto de presionar */
+            box-shadow: none;
+        }
+
+        .icon-custom {
+            color: #6f42c1;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .icon-custom:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">Mi Aplicación</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item">
+                        <a class="btn btn-danger text-white d-flex align-items-center custom-3d-btn" href="{% url 'logout_usuario' %}">
+                            <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+                        </a>
+                    </li>
+
+                    <style>
+                        /* Estilo personalizado para un botón 3D */
+                        .custom-3d-btn {
+                            border: none;
+                            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para efecto 3D */
+                            transition: all 0.3s ease; /* Suaviza el hover */
+                            font-weight: bold; /* Letra más destacada */
+                        }
+
+                        /* Efecto al pasar el ratón */
+                        .custom-3d-btn:hover {
+                            transform: translateY(-2px); /* Mueve ligeramente hacia arriba */
+                            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* Intensifica la sombra */
+                            background-color: #dc3545; /* Asegura el rojo en hover */
+                        }
+
+                        /* Efecto de presión */
+                        .custom-3d-btn:active {
+                            transform: translateY(2px); /* Mueve hacia abajo al presionar */
+                            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+                        }
+                    </style>
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_marcas' %}">Marca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_categorias' %}">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_tipos_motor' %}">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_productos' %}">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tipo_productos_listar' %}">Tipo Producto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'producto_tipo_list' %}">Productos tipo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_clientes' %}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_proveedores' %}">Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_compras' %}">Compras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_ventas' %}">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_tipos_documento' %}">Tipo de Documento</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menú Lateral -->
+    <div class="sidebar d-none d-md-block">
+        <h4 class="text-center mb-4">Menú de Navegación</h4>
+        <div class="list-group">
+            <a href="{% url 'home' %}" class="list-group-item list-group-item-action active">
+                <i class="bi bi-house-door icon-custom"></i> Inicio
+            </a>
+            <a href="{% url 'about' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-info-circle icon-custom"></i> Sobre Nosotros
+            </a>
+            <a href="{% url 'listar_marcas' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-gear icon-custom"></i> Marcas
+            </a>
+            <a href="{% url 'listar_categorias' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-tags icon-custom"></i> Categorias
+            </a>
+            <a href="{% url 'listar_tipos_motor' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-motorcycle icon-custom"></i> Tipo de Motor
+            </a>
+            <a href="{% url 'listar_productos' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-box icon-custom"></i> Productos
+            </a>
+            <a href="{% url 'tipo_productos_listar' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-boxes icon-custom"></i> Tipo Producto
+            </a>
+            <a href="{% url 'producto_tipo_list' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-boxes icon-custom"></i> Productos tipo
+            </a>
+            <a href="{% url 'listar_clientes' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-person icon-custom"></i> Clientes
+            </a>
+            <a href="{% url 'listar_proveedores' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-person-check icon-custom"></i> Proveedores
+            </a>
+            <a href="{% url 'listar_compras' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-cart icon-custom"></i> Compras
+            </a>
+            <a href="{% url 'listar_ventas' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-cash-coin icon-custom"></i> Ventas
+            </a>
+            <a href="{% url 'listar_tipos_documento' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-file-earmark-text icon-custom"></i> Tipo de Documento
+            </a>
+            <a href="{% url 'calculadora' %}" class="list-group-item list-group-item-action">
+                <i class="bi bi-file-earmark-text icon-custom"></i> Calculadora
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="content">
+        <div class="container">
+            {% block content %}
+            <!-- Aquí se mostrará el contenido específico de cada vista -->
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

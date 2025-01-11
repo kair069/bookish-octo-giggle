@@ -1,0 +1,36 @@
+{% extends 'mi_app/base.html' %}
+
+{% block content %}
+  <h1>Detalles de Venta: {{ venta.numero_documento }}</h1>
+  <a href="{% url 'agregar_detalle_venta' venta.id %}" class="btn btn-primary">Agregar Detalle</a>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for detalle in detalles %}
+        <tr>
+          <td>{{ detalle.producto.nombre_producto }}</td>
+          <td>{{ detalle.cantidad }}</td>
+          <td>{{ detalle.precio_unitario }}</td>
+          <td>{{ detalle.subtotal }}</td>
+          <td>
+            <a href="{% url 'editar_detalle_venta' detalle.id %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'eliminar_detalle_venta' detalle.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No hay detalles registrados para esta venta.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'listar_ventas' %}" class="btn btn-secondary">Volver a Ventas</a>
+{% endblock %}

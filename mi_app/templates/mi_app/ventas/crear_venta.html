@@ -1,0 +1,44 @@
+{% extends 'mi_app/base.html' %}
+
+{% block content %}
+  <h1>Registrar Nueva Venta</h1>
+  
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        {{ form.cliente.label_tag }}
+        {{ form.cliente }}
+      </div>
+      <div class="col-md-6">
+        {{ form.tipo_documento.label_tag }}
+        {{ form.tipo_documento }}
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        {{ form.numero_documento.label_tag }}
+        {{ form.numero_documento }}
+      </div>
+      <div class="col-md-6">
+        {{ form.total_venta.label_tag }}
+        {{ form.total_venta }}
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        {{ form.cliente_nombre.label_tag }}
+        {{ form.cliente_nombre }}
+      </div>
+      <div class="col-md-6">
+        {{ form.cliente_contacto.label_tag }}
+        {{ form.cliente_contacto }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4">Guardar Venta</button>
+    <a href="{% url 'listar_ventas' %}" class="btn btn-secondary mt-4">Cancelar</a>
+  </form>
+{% endblock %}

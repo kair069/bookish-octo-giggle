@@ -1,0 +1,33 @@
+{% extends 'mi_app/base.html' %}
+
+{% block content %}
+  <h1>Listado de Compras</h1>
+  <a href="{% url 'crear_compra' %}" class="btn btn-primary">Crear nueva compra</a>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Proveedor</th>
+        <th>Fecha de Compra</th>
+        <th>Total de Compra</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for compra in compras %}
+        <tr>
+          <td>{{ compra.id }}</td>
+          <td>{{ compra.proveedor }}</td>
+          <td>{{ compra.fecha_compra }}</td>
+          <td>{{ compra.total_compra }}</td>
+          <td>
+            <a href="{% url 'editar_compra' compra.id %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'eliminar_compra' compra.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            <!-- Enlace para ver los detalles de la compra -->
+            <a href="{% url 'listar_detalles' compra.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
