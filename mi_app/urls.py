@@ -128,6 +128,7 @@ urlpatterns = [
 
 
     path('calculadora/', views.calculadora, name='calculadora'),
+    path('metrics/', views.dashboard_view, name='dashboard_view'),
 ]
 
 

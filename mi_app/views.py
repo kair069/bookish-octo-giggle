@@ -172,31 +172,37 @@ from .forms import ProductoForm
 #     productos = Producto.objects.select_related('marca', 'categoria', 'tipo_motor').all()
 #     return render(request, 'mi_app/producto/listar.html', {'productos': productos})
 
-from django.shortcuts import render
-from .models import Producto
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import Producto
 
 def listar_productos(request):
     # Inicializar la consulta básica para seleccionar relaciones de los productos
     productos_list = Producto.objects.select_related('marca', 'categoria', 'tipo_motor')
 
-    # Obtener los parámetros de búsqueda desde la solicitud GET
+     # Obtener los parámetros de búsqueda desde la solicitud GET
     nombre = request.GET.get('nombre', '')
     marca = request.GET.get('marca', '')
     qr_code = request.GET.get('qr_code', '')
+    categoria = request.GET.get('categoria', '')
 
-    # Crear un filtro dinámico usando Q para poder combinar condiciones
+     # Crear un filtro dinámico usando Q para poder combinar condiciones
     filtros = Q()
+    # Aplicar filtros solo si tienen valor
     if nombre:
-        filtros &= Q(nombre_producto__icontains=nombre)
+        filtros &= Q(nombre_producto__icontains=nombre)  # Filtrar por nombre del producto
     if marca:
-        filtros &= Q(marca__nombre__icontains=marca)
+        filtros &= Q(marca__nombre_marca__icontains=marca)  # Filtrar por nombre de la marca
     if qr_code:
-        filtros &= Q(qr_code__icontains=qr_code)
+        filtros &= Q(qr_code__icontains=qr_code)  # Filtrar por código QR
+    if categoria:
+        filtros &= Q(categoria__nombre_categoria__icontains=categoria)  # Filtrar por nombre de categoría
 
-    # Aplicar los filtros a la consulta
-    productos_list = productos_list.filter(filtros)
+
+    # Aplicar los filtros solo si se han añadido
+    if filtros != Q():
+        productos_list = productos_list.filter(filtros)
 
     # Paginación: 4 productos por página
     paginator = Paginator(productos_list, 4)
@@ -220,10 +226,16 @@ def listar_productos(request):
     if base_url.endswith('&'):
         base_url = base_url[:-1]
 
-    # Pasar los productos y la URL base a la plantilla
+    marcas = Marca.objects.all()
+    categorias = Categoria.objects.all()
     return render(request, 'mi_app/producto/listar.html', {
         'productos': productos,
-        'base_url': base_url
+        'nombre': nombre,
+        'marca': marca,
+        'qr_code': qr_code,
+        'categoria': categoria,
+        'marcas': marcas,
+        'categorias': categorias,
     })
 
 
@@ -771,3 +783,5 @@ def eliminar_tipo_documento(request, pk):
     return render(request, 'mi_app/tipodocumento/eliminar_tipo_documento.html', {'tipo_documento': tipo_documento})
 
 from .calculadora_views import calculadora  # Importamos la vista
+
+from .dashboards import dashboard_view # Importamos la vista
