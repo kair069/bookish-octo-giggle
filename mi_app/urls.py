@@ -129,6 +129,9 @@ urlpatterns = [
 
     path('calculadora/', views.calculadora, name='calculadora'),
     path('metrics/', views.dashboard_view, name='dashboard_view'),
+
+
+    path('exportar_productos/', views.exportar_productos_excel , name='exportar_productos_excel'),
 ]
 
 

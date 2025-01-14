@@ -785,3 +785,5 @@ def eliminar_tipo_documento(request, pk):
 from .calculadora_views import calculadora  # Importamos la vista
 
 from .dashboards import dashboard_view # Importamos la vista
+
+from  mi_app.Vistas.exportar_excel  import exportar_productos_excel # Importamos la vista
